@@ -8,5 +8,7 @@ public class test
     public static void main(String[] args)
     {
         System.out.println("Hello World");  // 输出 Hello World
+        System.out.println("The minimum value for int is " + Integer.MIN_VALUE);
+        System.out.println("The maximum value for int is " + Integer.MAX_VALUE);
     }
 }
