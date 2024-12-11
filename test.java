@@ -1,10 +1,10 @@
+import src.test.*;
+
 public class test 
 {
-    /* 第一个Java程序
-     * 它将输出字符串 Hello World
-     */
+    // Driver code
     public static void main(String[] args) 
     {
-        System.out.println("Hello World"); // 输出 Hello World
+        src.test.test.main(args);
     }
 }
