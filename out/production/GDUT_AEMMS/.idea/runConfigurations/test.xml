@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="test" type="Application" factoryName="Application">
+    <option name="envFilePaths">
+      <option value="C:/Program Files/Java/jdk-21/bin/java.exe" />
+    </option>
+    <option name="MAIN_CLASS_NAME" value="Main" />
+    <module name="GDUT_AEMMS" />
+    <option name="PROGRAM_PARAMETERS" value="$MAVEN_REPOSITORY$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

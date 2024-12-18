@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "d:/2023年程序设计题目/ScoreDOS",
+      "program": "d:/2023年程序设计题目/ScoreDOS/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "D:/TOOLS/VSCode/VSCode2022/mingw64/bin/gdb.exe",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
