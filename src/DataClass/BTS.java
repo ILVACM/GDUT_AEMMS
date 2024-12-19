@@ -28,30 +28,6 @@ public class BTS
     // BTS 辅助变量
     private int temp;
 
-    // BTS 排序辅助比较器
-    Comparator<node> compare = new Comparator<node>() 
-    {
-        @Override
-        public int compare(node o1, node o2)
-        {
-            if(o1.PID == o2.PID)
-            {
-                if (o1.PNo == o2.PNo) 
-                {
-                    return o1.port - o2.port;
-                } 
-                else 
-                {
-                    return o1.PNo - o2.PNo;
-                }
-            }
-            else
-            {
-                return o1.PID - o2.PID;
-            }
-        }
-    };
-
     // BTS 构造函数
     public BTS()
     {
@@ -94,6 +70,78 @@ public class BTS
         return 0;
     }
 
+    // BTS 排序辅助比较器
+    Comparator<node> compare = new Comparator<node>() 
+    {
+        @Override
+        public int compare(node o1, node o2)
+        {
+            if(o1.PID == o2.PID)
+            {
+                if (o1.PNo == o2.PNo) 
+                {
+                    return o1.port - o2.port;
+                } 
+                else 
+                {
+                    return o1.PNo - o2.PNo;
+                }
+            }
+            else
+            {
+                return o1.PID - o2.PID;
+            }
+        }
+    };
+
+    public static int power(int x, int y) 
+    {
+        if (y < 0) 
+        {
+            throw new IllegalArgumentException("Exponent must be non-negative");
+        }
+        int result = 1;
+        while (y > 0) 
+        {
+            if ((y & 1) == 1) 
+            { // 如果n是奇数
+                result *= x;
+            }
+            x *= x;
+            y >>= 1; // 将n右移一位，相当于n除以2
+        }
+        return result;
+    }
+    // BTS 检索数组中点查找辅助函数
+    public int MidSearch( int length, int deep)
+    {
+        if ( deep == 0) 
+        {
+            return 0;
+        }
+
+        if ( deep == 1) 
+        {
+            return 1;
+        }
+
+        if ( deep == 2) 
+        {
+            return 2;
+        }
+
+        int temp_1 = power( 2, deep-1);
+        int temp_2 = power( 2, deep-2);
+
+        if ( length - ( temp_1 - 1) > temp_2 ) 
+        {
+            return temp_1 - 1;
+        }
+        else
+        {
+            return length - temp_2 + 1;
+        }
+    }
 
     // BTS 整理排序函数
     public int sort()

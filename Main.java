@@ -25,21 +25,26 @@ public class Main
 
     public static void main(String[] args) 
     {
-        node n1 = new node(1, (short)1, (short)1);
-        node n2 = new node(2, (short)2, (short)1);
-        node n3 = new node(3, (short)3, (short)1);
-        node n4 = new node(3, (short)3, (short)2);
-        node n5 = new node(5, (short)4, (short)1);
+        // node n1 = new node(1, (short)1, (short)1);
+        // node n2 = new node(2, (short)2, (short)1);
+        // node n3 = new node(3, (short)3, (short)1);
+        // node n4 = new node(3, (short)3, (short)2);
+        // node n5 = new node(5, (short)4, (short)1);
 
         BTS bts = new BTS();
         
-        bts.add(n4);
-        bts.add(n1);
-        bts.add(n2);
-        bts.add(n5);
-        bts.add(n3);
+        // bts.add(n4);
+        // bts.add(n1);
+        // bts.add(n2);
+        // bts.add(n5);
+        // bts.add(n3);
 
-        bts.sort();
+        // bts.sort();
+
+        int temp = bts.MidSearch(18, 5);
+        // int temp = 11;
+
+        System.out.printf( "%d", temp);
     }
 }
 
