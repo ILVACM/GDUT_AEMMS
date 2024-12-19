@@ -11,24 +11,48 @@ public class BTS
      * 增删查改
      */
 
-    // BST 基底数据储存数组
+    // BTS 基底数据储存数组
     private ArrayList<node> DataStore;
 
-    // BST 检索数组
+    // BTS 检索数组
     private ArrayList<Integer> DataIndex;
 
-    // BST 辅助标记数组
+    // BTS 辅助标记数组
     private ArrayList<Boolean> mark;
 
-    // BST 特征记录成员变量?????????
+    // BTS 特征记录成员变量
     public int amount;
     public int deepth;
     public boolean order;
 
-    // BST 辅助变量
+    // BTS 辅助变量
     private int temp;
 
-    // BST 构造函数
+    // BTS 排序辅助比较器
+    Comparator<node> compare = new Comparator<node>() 
+    {
+        @Override
+        public int compare(node o1, node o2)
+        {
+            if(o1.PID == o2.PID)
+            {
+                if (o1.PNo == o2.PNo) 
+                {
+                    return o1.port - o2.port;
+                } 
+                else 
+                {
+                    return o1.PNo - o2.PNo;
+                }
+            }
+            else
+            {
+                return o1.PID - o2.PID;
+            }
+        }
+    };
+
+    // BTS 构造函数
     public BTS()
     {
         /*
@@ -48,13 +72,15 @@ public class BTS
 
     }
 
-    // BST 深度更新函数
-    public int updateDeepth()
+    // BTS 基本特征变量更新函数
+    public int update()
     {
         /*
          * 更新深度
          * .........
          */
+
+        amount = DataStore.size();
 
         temp = amount;
 
@@ -68,14 +94,39 @@ public class BTS
         return 0;
     }
 
-    // BST 实例添加新的数据节点（两种添加方式，通过重载实现）
+
+    // BTS 整理排序函数
+    public int sort()
+    {
+        /*
+         * 对基底数组进行排序，并将下标整理到检索数组便于查找
+         */
+        //
+        update();
+
+        DataStore.sort(compare);
+
+        DataIndex.removeAll(DataIndex);
+
+        mark.removeAll(mark);
+        for (int i = 0; i < amount; i++)
+        {
+            mark.add(false);
+        }
+
+        //
+
+        order = true;
+        
+        return 0;
+    }
+
+    // BTS 实例添加新的数据节点（两种添加方式，通过重载实现）
     public int add(node New)
     {
         DataStore.add(New);
 
         amount++;
-
-        updateDeepth();
 
         order = false;
 
@@ -88,10 +139,8 @@ public class BTS
 
         amount++;
 
-        updateDeepth();
-
         order = false;
-        
+
         return 0;
     }
 }

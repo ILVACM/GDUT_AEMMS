@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "BooleanArrayChecker",
+      "request": "launch",
+      "mainClass": "BooleanArrayChecker",
+      "projectName": "GDUT_AEMMS_10b61985"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "Main",
