@@ -104,21 +104,31 @@ public class BTS
         //
         update();
 
-        DataStore.sort(compare);
-
-        DataIndex.removeAll(DataIndex);
-
-        mark.removeAll(mark);
-        for (int i = 0; i < amount; i++)
+        if ( amount == 0 )
         {
-            mark.add(false);
+            order = true;
+
+            return 0;
+        }
+        else
+        {
+            DataStore.sort(compare);
+
+            DataIndex.removeAll(DataIndex);
+
+            mark.removeAll(mark);
+            for (int i = 0; i < amount; i++)
+            {
+                mark.add(false);
+            }
+
+            //
+
+            order = true;
+            
+            return 0;
         }
 
-        //
-
-        order = true;
-        
-        return 0;
     }
 
     // BTS 实例添加新的数据节点（两种添加方式，通过重载实现）
