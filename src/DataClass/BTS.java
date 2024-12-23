@@ -95,7 +95,7 @@ public class BTS
     };
 
     // BTS 自定义快速幂函数
-    public static int power(int x, int y) 
+    private static int power(int x, int y) 
     {
         if (y < 0) 
         {
@@ -255,7 +255,7 @@ public class BTS
     }
 
     // BTS 实例添加新的数据节点（两种添加方式，通过重载实现）
-    public int add(node New)
+    public int add( node New)
     {
         DataStore.add(New);
 
@@ -266,7 +266,7 @@ public class BTS
         return 1;
     }
 
-    public int add(int PID, short PNo, short port)
+    public int add( int PID, short PNo, short port)
     {
         DataStore.add( new node(PID, PNo, port));
 
@@ -277,10 +277,146 @@ public class BTS
         return 1;
     }
 
-    // BTS 实例删除数据节点
-
     // BTS 实例查找数据节点
+    public int search( node index)
+    {
+        if (!order) 
+        {
+            DataStore.sort(compare);
+        }
 
-    // BTS 实例修改数据节点
-    
+        int Index;
+        Index = Collections.binarySearch(DataStore, index, compare);
+
+        if ( Index < 0) 
+        {
+            return -1;
+        }
+
+        return Index;
+    }
+
+    // BTS 实例删除数据节点（两种删除方式，通过重载实现）
+    public boolean remove( int Index)
+    {
+        if (!order) 
+        {
+            DataStore.sort(compare);
+        }
+
+        if ( Index >= amount|| Index < 0) 
+        {
+            return false;
+        }
+
+        DataStore.remove( Index);
+
+        sort();
+
+        return true;
+    }
+
+    public boolean remove( node index)
+    {
+        //
+        if (!order) 
+        {
+            DataStore.sort(compare);
+        }
+
+        int Index;
+        Index = Collections.binarySearch(DataStore, index, compare);
+
+        if ( Index < 0) 
+        {
+            return false;
+        }
+
+        DataStore.remove( Index);
+
+        sort();
+
+        return true;
+    }
+
+    // BTS 实例修改数据节点（两种修改方式，通过重载实现）
+    public boolean Edit( int Index, node New)
+    {
+        if (!order) 
+        {
+            DataStore.sort(compare);
+        }
+
+        if ( New == null|| Index < 0|| Index >= amount) 
+        {
+            return false;
+        }
+
+        node SourcNode = DataStore.get(Index);
+
+        if ( New.PID > 0) 
+        {
+            SourcNode.PID = New.PID;
+        }
+
+        if ( New.PNo > 0) 
+        {
+            SourcNode.PNo = New.PNo;
+        }
+
+        if ( New.port > 0) 
+        {
+            SourcNode.port = New.port;
+        }
+
+        DataStore.set( Index, SourcNode);
+
+        sort();
+
+        return true;
+    }
+
+    public boolean Edit( node Old, node New)
+    {
+        if ( New == null|| ( New.PID == -1&& New.PNo == -1&& New.port == -1)) 
+        {
+            return true;
+        }
+
+        if ( Old == null) 
+        {
+            return false;
+        }
+
+        int index;
+        index = search( Old);
+
+        if ( index < 0) 
+        {
+            return false;
+        }
+
+        node SourcNode = DataStore.get( index);
+
+        if ( New.PID > 0) 
+        {
+            SourcNode.PID = New.PID;
+        }
+
+        if ( New.PNo > 0) 
+        {
+            SourcNode.PNo = New.PNo;
+        }
+
+        if ( New.port > 0) 
+        {
+            SourcNode.port = New.port;
+        }
+
+        DataStore.set( index, SourcNode);
+
+        sort();
+
+        return true;
+    }
 }
