@@ -94,6 +94,7 @@ public class BTS
         }
     };
 
+    // BTS 自定义快速幂函数
     public static int power(int x, int y) 
     {
         if (y < 0) 
@@ -112,26 +113,40 @@ public class BTS
         }
         return result;
     }
+
     // BTS 检索数组中点查找辅助函数
-    public int MidSearch( int length, int deep)
+    public int MidSearch( int length)
     {
-        if ( deep == 0) 
+        if ( length == 0) 
         {
             return 0;
         }
 
-        if ( deep == 1) 
+        if ( length == 1) 
         {
             return 1;
         }
 
-        if ( deep == 2) 
+        if ( length == 2) 
         {
             return 2;
         }
 
-        int temp_1 = power( 2, deep-1);
-        int temp_2 = power( 2, deep-2);
+        if ( length == 3) 
+        {
+            return 2;
+        }
+
+        int deep = 0;
+        temp = length;
+        while ( temp > 0) 
+        {
+            temp >>= 1;
+            deep++;
+        }
+
+        int temp_1 = power( 2, deep-1);        //调用自定义快速幂函数
+        int temp_2 = power( 2, deep-2);        //调用自定义快速幂函数
 
         if ( length - ( temp_1 - 1) > temp_2 ) 
         {
@@ -152,6 +167,14 @@ public class BTS
         //
         update();
 
+        DataIndex.removeAll(DataIndex);
+
+        mark.removeAll(mark);
+        for (int i = 0; i < amount; i++)
+        {
+            mark.add(false);
+        }
+
         if ( amount == 0 )
         {
             order = true;
@@ -162,21 +185,73 @@ public class BTS
         {
             DataStore.sort(compare);
 
-            DataIndex.removeAll(DataIndex);
+            int flag = 0;
+            int flag_start = -1;
+            int flag_length = 0;
+            int flag_process = 0;
+            int midlength = 0;
+            temp = deepth;
 
-            mark.removeAll(mark);
-            for (int i = 0; i < amount; i++)
+            while ( flag_process < amount) 
             {
-                mark.add(false);
+                while( flag < amount) 
+                {
+                    if (mark.get(flag)) 
+                    {
+                        //
+                        midlength = MidSearch( flag_length);
+
+                        DataIndex.add( flag_start +midlength -1);
+
+                        mark.set( flag_start +midlength -1, true);
+
+                        flag_start = -1;
+                        flag_length = 0;
+                        flag_process++;
+
+                        if ( flag_process >= amount) 
+                        {
+                            break;
+                        }
+                        //
+                    }
+                    else
+                    {
+                        if ( flag_start == -1) 
+                        {
+                            flag_start = flag;
+                        }
+
+                        flag_length++;
+                    }
+
+                    flag++;
+                }
+
+                //
+                if ( flag_process >= amount) 
+                {
+                    break;
+                }
+
+                midlength = MidSearch( flag_length);
+
+                DataIndex.add( flag_start +midlength -1);
+
+                mark.set( flag_start +midlength -1, true);
+
+                flag_start = -1;
+                flag_length = 0;
+                flag_process++;
+                //
+                
+                flag = 0;
             }
-
-            //
-
-            order = true;
-            
-            return 0;
         }
 
+        order = true;
+            
+        return 0;
     }
 
     // BTS 实例添加新的数据节点（两种添加方式，通过重载实现）
@@ -188,7 +263,7 @@ public class BTS
 
         order = false;
 
-        return 0;
+        return 1;
     }
 
     public int add(int PID, short PNo, short port)
@@ -199,6 +274,13 @@ public class BTS
 
         order = false;
 
-        return 0;
+        return 1;
     }
+
+    // BTS 实例删除数据节点
+
+    // BTS 实例查找数据节点
+
+    // BTS 实例修改数据节点
+    
 }
